@@ -79,7 +79,11 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 	<script type="text/javascript">
         $(document).ready(function() {
-            $('#clientes').DataTable();
+            $('#clientes').DataTable({
+            	"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+				}
+            });    
         });
 
         $('table[data-form="deleteForm"]').on('click', '.form-delete', function(e){
