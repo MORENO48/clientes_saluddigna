@@ -33,7 +33,7 @@ class ClienteController extends Controller
             $valida = Cliente::where('nombre', $request->input('nombre'))
             ->where('appaterno', $request->input('apellido_paterno'))
             ->where('apmaterno', $request->input('apellido_materno'))
-            ->where('fechanac', $request->input('fecha_nacimiento'))
+            ->where('fechanac', date_format(date_create($request->input('fecha_nacimiento')), 'Y-m-d'))
             ->first();
 
             if ( is_null($valida)){
