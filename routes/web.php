@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/', function () {
+    return view('clientes');
+});
 
 Route::get('/',['as' => 'clientes.index' , 'uses' => 'ClienteController@index']);
 //Route::resource('clientes','ClienteController');
