@@ -12,11 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('clientes');
+    return view('welcome');
 });
-
-Route::get('/',['as' => 'clientes.index' , 'uses' => 'ClienteController@index']);
-//Route::resource('clientes','ClienteController');
 
 //Clientes
 Route::get('/clientes/create',['as' => 'clientes.create' , 'uses' => 'ClienteController@create']);
