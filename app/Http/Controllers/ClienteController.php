@@ -15,7 +15,7 @@ class ClienteController extends Controller
         $clientes = Cliente::all();
         foreach ($clientes as $cliente) {
             $cliente->estudio = $cliente->estudio;
-            $cliente->fechanac = date_format(date_create($cliente->fechanac), 'd-m-Y');;
+            $cliente->fechanac = date_format(date_create($cliente->fechanac), 'd/m/Y');;
         }
 
         return view('Clientes',compact('clientes'));
@@ -30,10 +30,12 @@ class ClienteController extends Controller
     public function store(RequestCliente $request)
     {
         try {
+            $fecha = date_format(date_create(str_replace('/','-',$request->input('fecha_nacimiento'))),'Y-m-d');
+
             $valida = Cliente::where('nombre', $request->input('nombre'))
             ->where('appaterno', $request->input('apellido_paterno'))
             ->where('apmaterno', $request->input('apellido_materno'))
-            ->where('fechanac', date_format(date_create($request->input('fecha_nacimiento')), 'Y-m-d'))
+            ->where('fechanac', $fecha)
             ->first();
 
             if ( is_null($valida)){
@@ -41,7 +43,7 @@ class ClienteController extends Controller
                 $cliente->nombre    = $request->input('nombre');
                 $cliente->appaterno = $request->input('apellido_paterno');
                 $cliente->apmaterno = $request->input('apellido_materno');
-                $cliente->fechanac  = date_format(date_create($request->input('fecha_nacimiento')), 'Y-m-d');
+                $cliente->fechanac  = $fecha;
                 $cliente->calle     = $request->input('calle');
                 $cliente->colonia   = $request->input('colonia');
                 $cliente->numext    = $request->input('num_ext');
@@ -72,6 +74,7 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::find($id);
+        $cliente->fechanac = date_format(date_create($cliente->fechanac), 'd/m/Y') ;
         $estudios = Estudio::all();
 
         return view('Clientes_edit',compact('cliente','estudios'));
@@ -80,22 +83,34 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            
-            $cliente = Cliente::find($id);
-            $cliente->nombre    = $request->input('nombre');
-            $cliente->appaterno = $request->input('apellido_paterno');
-            $cliente->apmaterno = $request->input('apellido_materno');
-            $cliente->fechanac  = date_format(date_create($request->input('fecha_nacimiento')), 'Y-m-d');
-            $cliente->calle     = $request->input('calle');
-            $cliente->colonia   = $request->input('colonia');
-            $cliente->numext    = $request->input('num_ext');
-            $cliente->cp        = $request->input('codigo_postal');
-            $cliente->ciudad    = $request->input('ciudad');
-            $cliente->estado    = $request->input('estado');
-            $cliente->estudiorealizar = $request->input('estudio');
+            $fecha = date_format(date_create(str_replace('/','-',$request->input('fecha_nacimiento'))),'Y-m-d');
 
-            $cliente->save();
-            flash('Cliente actualizado correctamente')->success();
+            $valida = Cliente::where('nombre', $request->input('nombre'))
+            ->where('appaterno', $request->input('apellido_paterno'))
+            ->where('apmaterno', $request->input('apellido_materno'))
+            ->where('fechanac', $fecha)
+            ->first();
+
+            if ( is_null($valida)){
+                $cliente = Cliente::find($id);
+                $cliente->nombre    = $request->input('nombre');
+                $cliente->appaterno = $request->input('apellido_paterno');
+                $cliente->apmaterno = $request->input('apellido_materno');
+                $cliente->fechanac  = $fecha;
+                $cliente->calle     = $request->input('calle');
+                $cliente->colonia   = $request->input('colonia');
+                $cliente->numext    = $request->input('num_ext');
+                $cliente->cp        = $request->input('codigo_postal');
+                $cliente->ciudad    = $request->input('ciudad');
+                $cliente->estado    = $request->input('estado');
+                $cliente->estudiorealizar = $request->input('estudio');
+                
+                $cliente->save();
+                flash('Cliente actualizado correctamente')->success();
+            }else{
+                flash('¡El cliente ya ha sido registrado!')->warning();
+                return back()->withInput();
+            }     
         } catch (\Illuminate\Database\QueryException $e) {
             flash('¡Error al actualizar cliente!')->error();
             return back()->withInput();

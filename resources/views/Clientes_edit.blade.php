@@ -81,7 +81,7 @@
 
             <div class="form-row">
                 <div class="col-md-4 form-group">
-                    <label for="codigo_postal">Codigo Postal</label>
+                    <label for="codigo_postal">Código Postal</label>
                     <input name="codigo_postal" type="number" class="form-control" id="codigo_postal" value="{{ $cliente->cp }}" required placeholder="CP" min="0">
                     {!! $errors->first('codigo_postal','<span class=error>:message</span>') !!}
                 </div>
@@ -129,7 +129,7 @@
     <script type="text/javascript">
         $(function () {
             $('#fecha_nacimiento').datetimepicker({
-                format: 'DD-MM-YYYY'
+                format: 'DD/MM/YYYY'
             });
         });
     </script>

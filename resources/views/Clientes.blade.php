@@ -53,7 +53,7 @@
 				    			<div>
 						    		{!! Form::model($cliente, ['method' => 'delete', 'route' => ['clientes.destroy', $cliente->id], 'class' =>'form-inline form-delete']) !!}
 				                    {!! Form::hidden('id', $cliente->id) !!}
-				                    {!! Form::submit(trans('Delete'), ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+				                    {!! Form::submit(trans('Eliminar'), ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
 				                    {!! Form::close() !!}		
 				    			</div>
 		                    </div>

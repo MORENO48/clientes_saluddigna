@@ -27,7 +27,7 @@ class RequestCliente extends FormRequest
             'nombre' => 'required|string|max:50',
             'apellido_paterno' => 'required|string|max:50',
             'apellido_materno' => 'required|string|max:50',
-            'fecha_nacimiento' => 'date_format: "d-m-Y"|required',
+            'fecha_nacimiento' => 'date_format: "d/m/Y"|required',
             'calle' => 'required|string|max:50',
             'colonia' => 'required|string|max:50',
             'num_ext' => 'required|integer|min:0',
