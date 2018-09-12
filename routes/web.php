@@ -15,14 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Empresas
-Route::resource('clientes','ClienteController');
 
-//Empresas
-/*Route::get('/empresas/create',['as' => 'empresas.create' , 'uses' => 'EmpresaController@create']);
-	Route::post('/empresas',['as' => 'empresas.store' , 'uses' => 'EmpresaController@store']);
-	Route::get('/empresas',['as' => 'empresas.index' , 'uses' => 'EmpresaController@index']);
-	Route::get('/empresas/{id}',['as' => 'empresas.show' , 'uses' => 'EmpresaController@show']);
-	Route::get('/empresas/{id}/edit',['as' => 'empresas.edit' , 'uses' => 'EmpresaController@edit']);
-	Route::put('/empresas/{id}',['as' => 'empresas.update' , 'uses' => 'EmpresaController@update']);
-	Route::delete('/empresas/{id}',['as' => 'empresas.destroy' , 'uses' => 'EmpresaController@destroy']);*/
+//Route::resource('clientes','ClienteController');
+
+//Clientes
+Route::get('/clientes/create',['as' => 'clientes.create' , 'uses' => 'ClienteController@create']);
+Route::post('/clientes',['as' => 'clientes.store' , 'uses' => 'ClienteController@store']);
+Route::get('/clientes',['as' => 'clientes.index' , 'uses' => 'ClienteController@index']);
+Route::get('/clientes/{id}',['as' => 'clientes.show' , 'uses' => 'ClienteController@show']);
+Route::get('/clientes/{id}/edit',['as' => 'clientes.edit' , 'uses' => 'ClienteController@edit']);
+Route::put('/clientes/{id}',['as' => 'clientes.update' , 'uses' => 'ClienteController@update']);
+Route::delete('/clientes/{id}',['as' => 'clientes.destroy' , 'uses' => 'ClienteController@destroy']);
